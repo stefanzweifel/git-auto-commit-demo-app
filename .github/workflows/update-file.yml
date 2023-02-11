@@ -1,0 +1,35 @@
+name: Update File
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  pull_request_target:
+  workflow_dispatch:
+
+jobs:
+  update-file:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        ref: ${{ github.head_ref }}
+
+    - run: date +%Y-%m-%d-%H-%M-%S >> file-to-update.md
+
+    - uses: stefanzweifel/git-auto-commit-action@v4
+      id: commit
+      with:
+        commit_message: Commit made through git-auto-commit
+
+    - name: "Run if changes have been detected (bool)"
+      if: ${{ steps.commit.outputs.changes_detected }} == 1
+      run: echo "Changes!"
+
+    - name: "Run if no changes have been detected (bool)"
+      if: ${{ steps.commit.outputs.changes_detected }} == 0
+      run: echo "No Changes!"
+
+    - name: GITHUB_OUTPUT value
+      run: echo $GITHUB_OUTPUT
