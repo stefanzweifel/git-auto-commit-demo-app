@@ -23,7 +23,7 @@ jobs:
       with:
         ref: ${{ github.head_ref }}
 
-    - run: date +%Y-%m-%d-%H-%M-%S >> file-to-update.md
+    - run: echo - $(date +%Y-%m-%d-%H-%M-%S) >> file-to-update.md
 
     - uses: stefanzweifel/git-auto-commit-action@v4
       id: commit
