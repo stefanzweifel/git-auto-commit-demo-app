@@ -39,7 +39,7 @@ jobs:
         FORMATED_DATE=$(date -u -d @$TIMESTAMP_OF_LAST_COMMIT +%Y-%m-%d)
 
         # Convert timestamp to UTC date in Y-m-d format
-        echo "date=$(echo$FORMATED_DATE)" >> $GITHUB_OUTPUT;
+        echo "date=$(echo $FORMATED_DATE)" >> $GITHUB_OUTPUT;
 
     - uses: stefanzweifel/git-auto-commit-action@v4
       id: commit
