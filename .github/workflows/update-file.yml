@@ -34,7 +34,7 @@ jobs:
 
     - run: |
         TIMESTAMP_OF_LAST_COMMIT=$(git log -1 --date=unix --format=%ad);
-        FORMATED_DATE=$(date -u -d $TIMESTAMP_OF_LAST_COMMIT +%Y-%m-%d)
+        FORMATED_DATE=$(date -u -d @$TIMESTAMP_OF_LAST_COMMIT +%Y-%m-%d)
         echo $FORMATED_DATE;
 
     - uses: stefanzweifel/git-auto-commit-action@v4
