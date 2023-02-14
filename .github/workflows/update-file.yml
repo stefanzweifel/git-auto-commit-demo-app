@@ -32,19 +32,10 @@ jobs:
 
     - run: echo - $(date +%Y-%m-%d-%H-%M-%S) >> file-to-update.md
 
-    - name: wip
-      id: date_convert
-      run: |
-        TIMESTAMP_OF_LAST_COMMIT=$(git log -1 --date=unix --format=%ad);
-        FORMATED_DATE=$(date -u -d @$TIMESTAMP_OF_LAST_COMMIT +%Y-%m-%d)
-
-        # Convert timestamp to UTC date in Y-m-d format
-        echo "date=$(echo $FORMATED_DATE)" >> $GITHUB_OUTPUT;
-
     - uses: stefanzweifel/git-auto-commit-action@v4
       id: commit
       with:
-        commit_message: Commit made through git-auto-commit ${{ steps.date_convert.outputs.date }}
+        commit_message: Commit made through git-auto-commit
 
     - name: "Run if changes have been detected (bool)"
       if: ${{ steps.commit.outputs.changes_detected }} == 1
