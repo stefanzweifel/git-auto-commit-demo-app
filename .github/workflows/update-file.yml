@@ -32,6 +32,11 @@ jobs:
 
     - run: echo - $(date +%Y-%m-%d-%H-%M-%S) >> file-to-update.md
 
+    - run: |
+        TIMESTAMP_OF_LAST_COMMIT=$(git log -1 --date=unix --format=%ad);
+        FORMATED_DATE=$(date -u -r $TIMESTAMP_OF_LAST_COMMIT +%Y-%m-%d)
+        echo $FORMATED_DATE;
+
     - uses: stefanzweifel/git-auto-commit-action@v4
       id: commit
       with:
